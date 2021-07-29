@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <p>Final Fantasy XIV app</p>
       <Servers />
+      <br />
       <Character />
     </div>
   );
