@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import Button from '@material-ui/core/Button';
+import { Button, Backdrop, CircularProgress } from '@material-ui/core';
 import CharacterInfo from './CharacterInfo';
 
 const Character = function() {
     const [ characterData, setCharacterData] = useState({});
+    const [ isLoading, setIsLoading] = useState(false);
     
     function getCharacterHandler() {
-
+        setIsLoading(true);
         fetch('https://xivapi.com/character/7051653')
         .then(response => response.json())
-        .then(data => setCharacterData(data.Character));
+        .then(data => {
+            setCharacterData(data.Character);
+            setIsLoading(false);
+        });
         
     }
     
@@ -17,6 +21,10 @@ const Character = function() {
         <div>
             <Button variant="contained" color="primary" onClick={getCharacterHandler}>Character</Button>
             {Object.keys(characterData).length > 0 && characterData.constructor === Object && <CharacterInfo characterData={characterData} />}
+
+            <Backdrop open={isLoading}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </div>
     );
         
