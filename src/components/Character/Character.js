@@ -20,6 +20,8 @@ const Character = function() {
     return (
         <div>
             <Button variant="contained" color="primary" onClick={getCharacterHandler}>Character</Button>
+            <br />
+            <br />
             {Object.keys(characterData).length > 0 && characterData.constructor === Object && <CharacterInfo characterData={characterData} />}
 
             <Backdrop open={isLoading}>

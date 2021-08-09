@@ -1,29 +1,46 @@
 import React from 'react';
 import Jobs from '../Jobs/Jobs';
-import { Container, Grid, Box, Avatar } from '@material-ui/core';
+import { Container, Grid, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Gear from '../Gear/Gear';
 
+//Styles for remove padding from Container module
+const useStyles = makeStyles((theme) => ({
+    root: {
+      paddingLeft: "0px",
+      paddingRight: "0px"
+    }
+  }));
 
 const CharacterInfo = function(props) {
-    console.log(props);
+    const classes = useStyles();
+    
     return(
         <div>
-            <Container maxWidth="xl">
-                <Grid container spacing={2}>
-                    <Grid item xs={6} sm={3}>
-                        <Container maxWidth="sm">
-                            <Box bgcolor="text.primary" color='white'>
-                                <Jobs classesInfo={props.characterData.ClassJobs} />
+            <Container maxWidth="100%" className={classes.root} >
+                <Box bgcolor="text.primary" color='white'>
+                    <Grid container spacing={2}>
+                        <Grid item xs={4}>
+                            <Container maxWidth="sm">
+                                <Box bgcolor="text.primary" color='white'>
+                                    <Jobs classesInfo={props.characterData.ClassJobs} />
+                                </Box>
+                            </Container >
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Box>
+                                <img src={props.characterData.Portrait} alt={props.characterData.Name} />
                             </Box>
-                        </Container >
+                        </Grid>
+                        <Grid item xs={4}>
+                        <Container maxWidth="sm">
+                            <Box ml="15px" bgcolor="text.primary" color='white'>
+                                <Gear gearItems={props.characterData.GearSet} />
+                            </Box>
+                            </Container >
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6} sm={3}>
-                        <Box>
-                            <img src={props.characterData.Portrait} alt={props.characterData.Name} />
-                        </Box>
-                        <Gear />
-                    </Grid>
-                </Grid>
+                </Box>
             </Container>
         </div>
     );
