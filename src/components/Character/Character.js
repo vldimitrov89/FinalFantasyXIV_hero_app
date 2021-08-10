@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { Button, Backdrop, CircularProgress } from '@material-ui/core';
 import CharacterInfo from './CharacterInfo';
 
@@ -18,7 +18,7 @@ const Character = function() {
     }
     
     return (
-        <div>
+        <Fragment>
             <Button variant="contained" color="primary" onClick={getCharacterHandler}>Character</Button>
             <br />
             <br />
@@ -27,7 +27,7 @@ const Character = function() {
             <Backdrop open={isLoading}>
                 <CircularProgress color="inherit" />
             </Backdrop>
-        </div>
+        </Fragment>
     );
         
         

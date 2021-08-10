@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(15),
   },
   title: {
     flexGrow: 1,
@@ -45,11 +45,11 @@ function App() {
             </IconButton>
 
             <Typography variant="h6" className={classes.title}>
-            <p>Final Fantasy XIV app</p>
+              <Link className={classes.linkButtons} color="inherit" to="/">Final Fantasy XIV app</Link>
             </Typography>
-            
-              <Link className={classes.linkButtons} color="inherit" to="/about">About</Link>
+
               <Link className={classes.linkButtons} color="inherit" to="/">Home</Link>
+              <Link className={classes.linkButtons} color="inherit" to="/about">About</Link>
             
           </Toolbar>
         </AppBar>

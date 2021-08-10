@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Gear from '../Gear/Gear';
 
 //Styles for remove padding from Container module
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
       paddingLeft: "0px",
       paddingRight: "0px"
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CharacterInfo = function(props) {
     const classes = useStyles();
+    console.log(props);
     
     return(
         <div>
@@ -29,6 +30,7 @@ const CharacterInfo = function(props) {
                         </Grid>
                         <Grid item xs={4}>
                             <Box>
+                                <p><strong>{props.characterData.Name}</strong> - {props.characterData.ActiveClassJob.Name} - Level: {props.characterData.ActiveClassJob.Level}</p>
                                 <img src={props.characterData.Portrait} alt={props.characterData.Name} />
                             </Box>
                         </Grid>

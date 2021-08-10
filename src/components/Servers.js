@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ServerList from './ServerList';
 import {Button, Backdrop, CircularProgress} from '@material-ui/core';
 
@@ -7,15 +7,7 @@ const Servers = function() {
     const [buttonState, setButtonState] = useState(false);
     const [ isLoading, setIsLoading] = useState(false);
 
-    function getServersHandler() {
-        if(buttonState === true) {
-            setButtonState(false);
-            return;
-        }
-
-        setButtonState(true);
-        setIsLoading(true);
-
+    useEffect(() => {
         fetch('https://xivapi.com/servers/dc', {
         headers: {
             "access-control-allow-origin" : "*",
@@ -27,6 +19,16 @@ const Servers = function() {
             setServers(data);
             setIsLoading(false);
         });
+    }, [servers]);
+
+    function getServersHandler() {
+        if(buttonState === true) {
+            setButtonState(false);
+            return;
+        }
+
+        setButtonState(true);
+        setIsLoading(true);
     }
 
     return (

@@ -2,9 +2,9 @@ import React from 'react';
 
 const About = function() {
     return(
-        <div>
+        <React.Fragment>
             <p>ABOUT PAGE</p>
-        </div>
+        </React.Fragment>
     );
 }
 
