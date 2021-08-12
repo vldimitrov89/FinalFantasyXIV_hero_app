@@ -61,6 +61,7 @@ function App() {
           <Route path="/">
             <Servers />
             <br />
+            <br />
             <Character />
           </Route>
         </Switch>

@@ -13,6 +13,8 @@ const Character = function() {
         .then(data => {
             setCharacterData(data.Character);
             setIsLoading(false);
+        }).catch((error) => {
+            console.log(error);
         });
         
     }

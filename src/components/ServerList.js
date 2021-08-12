@@ -1,3 +1,4 @@
+import React from 'react';
 import Server from './Server';
 
 const ServerList = function(props) {
@@ -5,7 +6,7 @@ const ServerList = function(props) {
     const servers = Object.values(props.servers);
 
     return (
-        <div>
+        <React.Fragment>
               {titles.map((title, index) => (
                 <Server
                     key={index}
@@ -13,7 +14,7 @@ const ServerList = function(props) {
                     servers={servers[index]}
                 />
             ))}
-        </div>
+        </React.Fragment>
     );
 }
 

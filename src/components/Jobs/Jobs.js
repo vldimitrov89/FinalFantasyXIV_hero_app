@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { Box, Slider, Grid, Avatar } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-//Styles for remove padding from Container module
-const theme = createTheme({
-    overrides: {
-      MuiSlider: {
-        markLabel: {
-          color: 'white',
-        },
-      },
-    },
-});
+//Styles for center job imaged
+const useStyles = makeStyles(() => ({
+    centeredJobImg: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }
+  }));
 
 const Jobs = function(props) {
+    const classes = useStyles();
 
     const [jobIcons, setJobIcons] = useState([]);
 
@@ -22,58 +20,23 @@ const Jobs = function(props) {
         .then(response => response.json())
         .then(data => {
             setJobIcons(data.Results);
+        }).catch((error) => {
+            console.log(error);
         });
     }, []);
 
-    //labels for the jobs progress sliders
-    const marks = [
-        {
-            value: 0,
-            label: '0',
-        },
-        {
-            value: 10,
-            label: '10',
-        },
-        {
-            value: 20,
-            label: '20',
-        },
-        {
-            value: 30,
-            label: '30',
-        },
-        {
-            value: 40,
-            label: '40',
-        },
-        {
-            value: 50,
-            label: '50',
-        },
-        {
-            value: 60,
-            label: '60',
-        },
-        {
-            value: 70,
-            label: '70',
-        },
-        {
-            value: 80,
-            label: '80',
-        },
-    ];
-    
     return(
-        <ThemeProvider theme={theme}>
+        <Fragment>
             {props.classesInfo.map((job, index) => {
+                if(job.Level === 0) {
+                    return '';
+                }
                 return (
-                  <Box mt="10px" key={job.JobID}>
+                  <Box mt="10px" height="100px" key={job.JobID}>
                         <Grid container spacing={2}>
                             <Grid item xs={6} sm={3}>
                                 <Box>
-                                    {typeof jobIcons[index] !== 'undefined' && <Avatar src={"https://xivapi.com/" + jobIcons.find(element => element.ID === job.JobID).Icon} alt={job.UnlockedState.Name} />}
+                                    {typeof jobIcons[index] !== 'undefined' && <Avatar className={classes.centeredJobImg} src={"https://xivapi.com/" + jobIcons.find(element => element.ID === job.JobID).Icon} alt={job.UnlockedState.Name} />}
                                 </Box>
                             </Grid>
                             <Grid item xs={12} sm={8}>
@@ -96,7 +59,7 @@ const Jobs = function(props) {
                                         min={0}
                                         max={80}
                                         value={job.Level}
-                                        marks={marks}
+                                        //marks={marks}
                                         valueLabelDisplay="on"
                                     />
                                 </Box>
@@ -105,7 +68,7 @@ const Jobs = function(props) {
                   </Box>      
                );
             })}
-        </ThemeProvider>
+        </Fragment>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import ServerList from './ServerList';
 import {Button, Backdrop, CircularProgress} from '@material-ui/core';
 
@@ -18,8 +18,10 @@ const Servers = function() {
         .then(data => {
             setServers(data);
             setIsLoading(false);
+        }).catch((error) => {
+            console.log(error);
         });
-    }, [servers]);
+    }, []);
 
     function getServersHandler() {
         if(buttonState === true) {
@@ -32,13 +34,13 @@ const Servers = function() {
     }
 
     return (
-        <div>
+        <Fragment>
             <Button variant="contained" color="primary" onClick={getServersHandler}>Servers</Button>
             {(buttonState === true) ? <ServerList servers={servers} /> : ''}
             <Backdrop open={isLoading}>
                 <CircularProgress color="inherit" />
             </Backdrop>
-        </div>
+        </Fragment>
     );
 }
 

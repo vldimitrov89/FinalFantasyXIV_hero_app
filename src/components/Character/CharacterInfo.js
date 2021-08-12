@@ -14,10 +14,9 @@ const useStyles = makeStyles(() => ({
 
 const CharacterInfo = function(props) {
     const classes = useStyles();
-    console.log(props);
     
     return(
-        <div>
+        <React.Fragment>
             <Container maxWidth="100%" className={classes.root} >
                 <Box bgcolor="text.primary" color='white'>
                     <Grid container spacing={2}>
@@ -44,7 +43,7 @@ const CharacterInfo = function(props) {
                     </Grid>
                 </Box>
             </Container>
-        </div>
+        </React.Fragment>
     );
 }
 
