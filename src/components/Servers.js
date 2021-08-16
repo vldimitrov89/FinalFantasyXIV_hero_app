@@ -5,15 +5,10 @@ import {Button, Backdrop, CircularProgress} from '@material-ui/core';
 const Servers = function() {
     const [servers, setServers] = useState([]);
     const [buttonState, setButtonState] = useState(false);
-    const [ isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        fetch('https://xivapi.com/servers/dc', {
-        headers: {
-            "access-control-allow-origin" : "*",
-            "Content-type": "application/json; charset=UTF-8"
-          }
-        })
+        fetch('https://xivapi.com/servers/dc')
         .then(response => response.json())
         .then(data => {
             setServers(data);
@@ -21,7 +16,7 @@ const Servers = function() {
         }).catch((error) => {
             console.log(error);
         });
-    }, []);
+    }, [servers]);
 
     function getServersHandler() {
         if(buttonState === true) {

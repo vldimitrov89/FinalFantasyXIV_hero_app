@@ -9,6 +9,10 @@ const useStyles = makeStyles(() => ({
     root: {
       paddingLeft: "0px",
       paddingRight: "0px"
+    },
+    imgStyle: {
+        width: "90%",
+        height: "90%"
     }
   }));
 
@@ -28,10 +32,12 @@ const CharacterInfo = function(props) {
                             </Container >
                         </Grid>
                         <Grid item xs={4}>
-                            <Box>
-                                <p><strong>{props.characterData.Name}</strong> - {props.characterData.ActiveClassJob.Name} - Level: {props.characterData.ActiveClassJob.Level}</p>
-                                <img src={props.characterData.Portrait} alt={props.characterData.Name} />
-                            </Box>
+                            <Container>
+                                <Box bgcolor="text.primary">
+                                    <p><strong>{props.characterData.Name}</strong> - {props.characterData.ActiveClassJob.Name} - Level: {props.characterData.ActiveClassJob.Level}</p>
+                                    <img className={classes.imgStyle} src={props.characterData.Portrait} alt={props.characterData.Name} />
+                                </Box>
+                            </Container >
                         </Grid>
                         <Grid item xs={4}>
                         <Container maxWidth="sm">

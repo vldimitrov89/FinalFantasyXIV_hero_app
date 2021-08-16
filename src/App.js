@@ -1,6 +1,6 @@
+import React, { Suspense } from 'react';
 import './App.css';
 import Servers from './components/Servers';
-import Character from './components/Character/Character';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import {
@@ -9,7 +9,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import About from './components/About';
+import {Backdrop, CircularProgress} from '@material-ui/core';
 
 //Styles for AppBar
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+//lazy loading for about
+const Character = React.lazy(() =>  import('./components/Character/Character'));
+const About = React.lazy(() =>  import('./components/About'));
+
 function App() {
   const classes = useStyles();
 
@@ -49,22 +53,28 @@ function App() {
             </Typography>
 
               <Link className={classes.linkButtons} color="inherit" to="/">Home</Link>
+              <Link className={classes.linkButtons} color="inherit" to="/character">Character</Link>
               <Link className={classes.linkButtons} color="inherit" to="/about">About</Link>
             
           </Toolbar>
         </AppBar>
         <br />
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Servers />
-            <br />
-            <br />
-            <Character />
-          </Route>
-        </Switch>
+        <Suspense fallback={
+          <Backdrop open={true}>
+              <CircularProgress color="inherit" />
+          </Backdrop>}>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/character">
+              <Character />
+            </Route>
+            <Route path="/">
+              <Servers />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </div>
   );
